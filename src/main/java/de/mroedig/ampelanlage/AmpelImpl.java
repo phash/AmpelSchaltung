@@ -17,28 +17,42 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 package de.mroedig.ampelanlage;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  *
  * @author Manuel
+ *
+ * die Ampel - hat nur eine updateMethode
  */
-public class AmpelZentrale {
+public class AmpelImpl implements Ampel {
 
-    Set<Ampel> ampeln = new HashSet<>();
+    private Ampelphase aktuellePhase;
+    private String ampelName;
 
-    public void addAmpel(Ampel neueAmpel) {
-        ampeln.add(neueAmpel);
+    public AmpelImpl(Ampelphase aktuell, String ampelName) {
+        this.aktuellePhase = aktuell;
+        this.ampelName = ampelName;
     }
 
-    public void removeAmpel(Ampel zuEntfernendeAmpel) {
-        ampeln.remove(zuEntfernendeAmpel);
+    @Override
+    public void update() {
+        System.out.print("Ampel " + ampelName + " schaltet von: " + aktuellePhase);
+        aktuellePhase = Ampelphase.getNaechstePhase(this.aktuellePhase);
+        System.out.println(" auf: " + aktuellePhase);
     }
 
-    public void updateAmpeln() {
-        for (Ampel ampel : ampeln) {
-            ampel.update();
-        }
+    public Ampelphase getAktuellePhase() {
+        return aktuellePhase;
+    }
+
+    public void setAktuellePhase(Ampelphase aktuellePhase) {
+        this.aktuellePhase = aktuellePhase;
+    }
+
+    public String getAmpelName() {
+        return ampelName;
+    }
+
+    public void setAmpelName(String ampelName) {
+        this.ampelName = ampelName;
     }
 }
