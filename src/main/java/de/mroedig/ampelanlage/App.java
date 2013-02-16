@@ -1,4 +1,4 @@
-package de.mroeidg.ampelanlage;
+package de.mroedig.ampelanlage;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
